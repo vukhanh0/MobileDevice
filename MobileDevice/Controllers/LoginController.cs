@@ -3,6 +3,7 @@ using MobileDevice.DTO;
 using MobileDevice.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -110,5 +111,82 @@ namespace MobileDevice.Controllers
         }
         #endregion
 
+        #region Đổi thông tin cá nhân
+        [HttpGet]
+        public ActionResult ChangeInfo()
+        {
+            var username = Session["username"];
+            Account acc = db.Accounts.Where(p => p.UserName.Equals((string)username)).FirstOrDefault();
+            //if(acc.Phone != null)
+            //{
+            //    acc.Phone = acc.Phone.Trim();
+            //}
+            return View(acc);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeInfo([Bind(Include = "UserName,Password,FullName,Phone,Address,Email,Avatar")] Account account)
+        {
+            var userName = Session["username"];
+            Account acc = db.Accounts.Where(u => u.UserName.Equals((string)userName)).FirstOrDefault();
+            var email1 = account.Email.Trim();
+            var email = db.Accounts.Where(u => u.Email.Equals(email1) && !u.UserName.Equals((string)userName)).ToList();
+            if (email.Count() > 0)
+            {
+                ViewBag.ErrorUpdate = "Email đã tồn tại !";
+            }
+            else
+            {
+                //if (ModelState.IsValid)
+                //{
+                    var f = Request.Files["Image"];
+                    if (f != null && f.ContentLength > 0)
+                    {
+                        //Use Namespace called : System.IO
+                        string FileName = System.IO.Path.GetFileName(f.FileName);
+                        //Lấy tên file upload
+                        string UploadPath = Server.MapPath("~/wwwroot/Image/" + FileName);
+                        //Copy Và lưu file vào server. 
+                        f.SaveAs(UploadPath);
+                        //Lưu tên file vào db
+                        account.Avatar = FileName;
+                        acc.Avatar = account.Avatar;
+                        Session["Avatar"] = account.Avatar;
+                    }
+                    //acc.Password = account.Password;
+                    acc.Email = account.Email;
+                    acc.FullName = account.FullName;
+                    acc.Address = account.Address;
+                    acc.Phone = account.Phone;
+                    db.SaveChanges();
+                    ViewBag.UpdateOk = "Cập nhật thành công !";
+                    Session["fullname"] = account.FullName;
+                    return View(acc);
+                //}
+            }
+            return View(acc);
+        }
+
+        public ActionResult ChangePassword(FormCollection col)
+        {
+            var OldPass = col["OldPassword"];
+            var NewPass = col["NewPassword"];
+            var userName = Session["username"];
+            Account acc = db.Accounts.Where(u => u.UserName.Equals((string)userName)).FirstOrDefault();
+            if (ModelState.IsValid)
+            {
+                if (OldPass == acc.Password)
+                {
+                    acc.Password = NewPass;
+                    db.Entry(acc).State = EntityState.Modified;
+                    db.SaveChanges();
+                    ViewBag.Success = "Cập nhật thành công!";
+                    return RedirectToAction("ChangeInfo", "Login");
+                }
+            }
+            return RedirectToAction("ChangeInfo", "Login");
+        }
+        #endregion
     }
 }

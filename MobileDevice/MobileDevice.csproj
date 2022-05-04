@@ -446,6 +446,7 @@
     <Content Include="Views\Cart\CartNull.cshtml" />
     <Content Include="Views\Cart\Xacnhandonhang.cshtml" />
     <Content Include="Views\Category\_Danhmuc.cshtml" />
+    <Content Include="Views\Login\ChangeInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
