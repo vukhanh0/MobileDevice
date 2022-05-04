@@ -1,0 +1,92 @@
+﻿@model MobileDevice.DTO.AccountDTO
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Đăng nhập</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href="/Home/Index">Trang chủ</a></li>
+                    <li class="active">Đăng nhập</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<!-- Đăng nhập -->
+<section class="ftco-section">
+    <div class="container" style="margin: auto; padding: auto">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-10">
+                <div class="wrap d-md-flex">
+                    <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center ">
+                        <div class="text w-100">
+                            <h2>Bạn mới đến với cửa hàng của chúng tôi?</h2>
+                            <p>Tạo một tài khoản để tham gia mua sắm được dễ dàng và thuận tiện hơn!</p>
+                            <a href="/Login/Signin" class="btn btn-white btn-outline-white">Tạo tài khoản mới</a>
+                        </div>
+                    </div>
+                    <div class="login-wrap p-4 p-lg-5 order-md-last">
+                        <div class="d-flex">
+                            <div class="w-100">
+                                <h1 class="mb-4">Đăng nhập</h1>
+                            </div>
+                            <div class="w-100">
+                                <p class="social-media d-flex justify-content-end">
+                                    <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                                    <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                                </p>
+                            </div>
+                        </div>
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <form action="/Login/Login/" class="signin-form">
+
+                                <div class="form-group mb-3">
+                                    <label class="label" for="name">Tài khoản</label>
+                                    <input type="text" class="form-control" placeholder="Tài khoản"
+                                           id="login_taikhoan" onblur="val_login_dangnhap()" name="UserName">
+                                    @*@Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder="Tài khoản"} })
+                                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })*@
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="label" for="password">Mật khẩu</label>
+                                    <input type="password" class="form-control" placeholder="Mật khẩu"
+                                           id="login_matkhau" name="Password">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="form-control btn btn-primary submit px-3" onclick="checkrong_login()">Đăng nhập</button>
+                                </div>
+                                <div class="form-group d-md-flex">
+                                    <div class="w-50 text-left">
+                                        <label class="checkbox-wrap checkbox-primary mb-0">
+                                            Nhớ mật khẩu
+                                            <input type="checkbox" checked>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="w-50 text-md-right">
+                                        <a href="/Login/ForgotPassword">Quên mật khẩu</a>
+                                    </div>
+                                </div>
+                            </form>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /Đăng nhập-->

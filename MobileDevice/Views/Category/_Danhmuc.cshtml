@@ -1,0 +1,79 @@
+﻿
+@model IEnumerable<MobileDevice.Models.Category>
+@{
+    var listIdCategory = "0";
+    var totalAllProduct = 0;
+    foreach (var item in Model)
+    {
+        listIdCategory += ";" + item.ID_Category;
+        totalAllProduct += item.Products.Count();
+    }
+
+}
+
+<!-- aside Widget -->
+<div class="aside">
+    <h3 class="aside-title">Danh mục</h3>
+    <div class="checkbox-filter">
+        <div style="width: 250px;">
+            <a href="/Products/Index/">
+                <buton class="btn btn-primary">
+                    Tất cả sản phẩm
+                    <small>(@totalAllProduct)</small>
+                </buton>
+            </a>
+            <small></small>
+
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="input-checkbox" >
+                @*<a href="/Products/Index?sortOrder=@ViewBag.iphone" >*@
+                    <buton class="btn btn-primary"style="width: 185px; text-align: center;">
+                        @item.Name
+                        <small>(@item.Products.Where(p=>p.Status).Count())</small>
+                    </buton>
+                @*</a>*@
+            </div>
+        }
+
+
+        @*<div class="input-checkbox">
+            <a href="/Products/Index?sortOrder=@ViewBag.samsung">
+                <buton class="btn btn-primary">
+                    Samsung
+                    <small>(740)</small>
+                </buton>
+            </a>
+        </div>
+
+        <div class="input-checkbox">
+            <a href="/Products/Index?sortOrder=@ViewBag.oppo">
+                <buton class="btn btn-primary">
+                    Oppo
+                    <small>(1450)</small>
+                </buton>
+            </a>
+        </div>
+
+        <div class="input-checkbox">
+            <a href="/Products/Index?sortOrder=@ViewBag.huawei">
+                <buton class="btn btn-primary">
+                    Huawei
+                    <small>(578)</small>
+                </buton>
+            </a>
+        </div>
+
+        <div class="input-checkbox">
+            <a href="/Products/Index?sortOrder=@ViewBag.sony">
+                <buton class="btn btn-primary">
+                    Sony
+                    <small>(120)</small>
+                </buton>
+            </a>
+        </div>*@
+
+    </div>
+</div>
+<!-- /aside Widget -->

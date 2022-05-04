@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Sendo</title>
+    <link rel="stylesheet" href="~/wwwroot/css/dark-theme.min.css">
+    <link rel="stylesheet" href="~/wwwroot/css/light-theme.min.css">
+    <link rel="stylesheet" href="~/wwwroot/css/colored-theme.min.css">
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="~/wwwroot/css/bootstrap.min.css" />
+
+    <!-- Slick -->
+
+    <link type="text/css" rel="stylesheet" href="~/wwwroot/css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="~/wwwroot/css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="~/wwwroot/css/font-awesome.min.css">
+    <link href="~/wwwroot/css/slick.css" rel="stylesheet" />
+    <!-- Custom stlylesheet -->
+    <link href="~/wwwroot/css/style_login.css" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="~/wwwroot/css/style.css" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <!-- TOP HEADER -->
+        <div id="top-header">
+            <div class="container">
+                <ul class="header-links pull-left">
+                    <li><a href="#"><i class="fa fa-phone"></i> 0982 993 736</a></li>
+                    <li><a href="mailto:khanhlnlov3@gmail.com"><i class="fa fa-envelope-o"></i> khanhlnlov3@gmail.com</a></li>
+                    <li><a href="#"><i class="fa fa-map-marker"></i> Đại học Công Nghiệp Hà Nội</a></li>
+                </ul>
+                <ul class="header-links pull-right">
+                    @if (Session["Taikhoan"] == null)
+                    {
+                        <li>
+                            <a href="/Login/Login">
+                                <i class="fa fa-user-o"></i>
+                                Đăng nhập
+
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <div class="dropdown">
+                                <a class="nav-link dropdown-toggle" id="dropdownMenuButton1" data-toggle="dropdown" aria-expanded="true">
+                                    @Session["username"]
+                                </a>
+                                <div class="dropdown-menu " aria-labelledby="dropdownMenuButton1" style="background: #1e1f29">
+                                    <a class="dropdown-item nav-item nav-link" href="#" style="background: #1e1f29">Thông tin cá nhân</a>
+                                    <a class="dropdown-item nav-item nav-link" href=@Url.Action("Logout", "Login") style="background: #1e1f29">Đăng xuất</a>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <!-- /TOP HEADER -->
+        <!-- MAIN HEADER -->
+        <div id="header">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <!-- LOGO -->
+                    <div class="col-md-3">
+                        <div class="header-logo">
+                            <a href="index.html" class="logo">
+                                <img src="~/wwwroot/img/logo-sendo.png" alt="" style="width: 169px; height: 70px">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /LOGO -->
+                    <!-- SEARCH BAR -->
+                    <div class="col-md-6">
+                        <div class="header-search">
+                            @using (Html.BeginForm("Index", "Products", FormMethod.Post))
+                            {
+                                <form>
+                                    <button class="input-select btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true"
+                                            style="position: relative; top: -2px;">
+                                        Danh mục
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                        <li><a class="dropdown-item" href="/Products/Index?sortOrder=@ViewBag.iphone">Iphone</a></li>
+                                        <li><a class="dropdown-item" href="/Products/Index?sortOrder=@ViewBag.samsung">Samsung</a></li>
+                                        <li><a class="dropdown-item" href="/Products/Index?sortOrder=@ViewBag.oppo">Oppo</a></li>
+                                        <li><a class="dropdown-item" href="/Products/Index?sortOrder=@ViewBag.huawei">Huawei</a></li>
+                                        <li><a class="dropdown-item" href="/Products/Index?sortOrder=@ViewBag.sony">Sony</a></li>
+                                    </ul>
+
+
+                                    <input class="input" placeholder="Tìm kiếm" , name="searchstring" @ViewBag.CurrentFilter as string>
+
+                                    <button class="search-btn">Tìm kiếm</button>
+
+                                </form>
+                            }
+                        </div>
+                    </div>
+                    <!-- /SEARCH BAR -->
+                    <!-- ACCOUNT -->
+                    <div class="col-md-3 clearfix">
+                        <div class="header-ctn">
+                            <!-- Wishlist -->
+                            <!-- <div>
+                                <a href="#">
+                                    <i class="fa fa-heart-o"></i>
+                                    <span>Your Wishlist</span>
+                                    <div class="qty">2</div>
+                                </a>
+                            </div> -->
+                            <!-- /Wishlist -->
+                            <!-- Cart -->
+                            <div class="dropdown">
+                                <a href="/Cart/Cart">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <span>Giỏ hàng</span>
+                                    @if (@Session["tongsoluong"] == null)
+                                    {
+                                        <div class="hide">@Session["tongsoluong"]</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="qty">@Session["tongsoluong"]</div>
+                                    }
+
+                                </a>
+                            </div>
+                            <!-- /Cart -->
+                            <!-- Menu Toogle -->
+                            <div class="menu-toggle">
+                                <a href="#">
+                                    <i class="fa fa-bars"></i>
+                                    <span>Menu</span>
+                                </a>
+                            </div>
+                            <!-- /Menu Toogle -->
+                        </div>
+                    </div>
+                    <!-- /ACCOUNT -->
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- /MAIN HEADER -->
+    </header>
+    <!-- /HEADER -->
+    <!-- NAVIGATION -->
+    <nav id="navigation">
+        <!-- container -->
+        <div class="container">
+            <!-- responsive-nav -->
+            <div id="responsive-nav">
+                <!-- NAV -->
+                <ul class="main-nav nav navbar-nav" style="display: inline-block !important">
+                    <li><a href="/Home/Index">Trang chủ</a></li>
+                    <li><a href="/Products/Index">Danh mục sản phẩm</a></li>
+                    <li><a href="/Home/Introduce">Giới thiệu</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+                <!-- /NAV -->
+            </div>
+            <!-- /responsive-nav -->
+        </div>
+        <!-- /container -->
+    </nav>
+    <!-- /NAVIGATION -->
+    @RenderBody()
+    <!-- FOOTER -->
+    <footer id="footer">
+        <!-- top footer -->
+        <div class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Liên hệ</h3>
+                            <ul class="footer-links">
+                                <li>
+                                    <a href="#"><i class="fa fa-map-marker"></i>Đại học Công Nghiệp Hà Nội</a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-phone"></i>0982993736</a></li>
+                                <li><a href="mailto:khanhlnlov3@gmail.com"><i class="fa fa-envelope-o"></i>khanhlnlov3@gmail.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Về Mobile Phone</h3>
+                            <ul class="footer-links">
+                                <li><a href="/Products/Index">Danh mục sản phẩm</a></li>
+                                <li><a href="/Home/Introduce">Giới thiệu</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Liên hệ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="clearfix visible-xs"></div>
+
+                    <div class="col-md-6 col-xs-6">
+                        <div class="footer">
+                            <div class="newsletter">
+                                <h3 class="footer-title">Bản tin</h3>
+                                <p>Theo dõi chúng tôi qua email để nhận những ưu đãi mới nhất</p>
+                                <form>
+                                    <input class="input " type="email" placeholder="Nhập email tại đây">
+                                    <button class="newsletter-btn"><i class="fa fa-envelope"></i> Theo dõi</button>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /top footer -->
+        <!-- bottom footer -->
+        <div id="bottom-footer" class="section">
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <ul class="footer-payments">
+                            <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+                            <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+                            <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+                            <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+                            <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+                            <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+                        </ul>
+                        <span class="copyright">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> Bản quyền thuộc về Vũ Duy Khánh
+                            <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="mailto:khanhlnlov3@gmail.com">KHÁNH</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </span>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /bottom footer -->
+    </footer>
+    <!-- /FOOTER -->
+    <!-- jQuery Plugins -->
+    <script src="~/wwwroot/js/jquery.min.js"></script>
+    <script src="~/wwwroot/js/bootstrap.min.js"></script>
+    <script src="~/wwwroot/js/slick.min.js"></script>
+    <script src="~/wwwroot/js/nouislider.min.js"></script>
+    <script src="~/wwwroot/js/jquery.zoom.min.js"></script>
+    <script src="~/wwwroot/js/main.js"></script>
+    <script src="~/wwwroot/js/growl-notification.min.js"></script>
+    <script src="~/wwwroot/jsDefine/client_signin.js"></script>
+    <script src="~/wwwroot/jsDefine/client_login.js"></script>
+    <script src="~/wwwroot/jsDefine/client_forgotpassword.js"></script>
+</body>
+</html>

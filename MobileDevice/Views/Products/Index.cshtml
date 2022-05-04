@@ -1,0 +1,125 @@
+﻿@model IEnumerable<MobileDevice.Models.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Danh mục sản phẩm</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href="/Home/Index">Trang chủ</a></li>
+                    <li class="active">Danh mục sản phẩm</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- ASIDE -->
+            <div id="aside" class="col-md-3">
+                @{
+                    Html.RenderAction("_Danhmuc", "Category");
+                }
+
+            </div>
+            <!-- /ASIDE -->
+            <!-- STORE -->
+            <div id="store" class="col-md-9">
+                <!-- store top filter -->
+                <div class="store-filter clearfix">
+                    <div class="store-sort">
+
+                        <div class="dropdown">
+                            <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                                Sắp xếp theo:
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li><a class="dropdown-item" href="/Products/Index?sortOrder=@ViewBag.saptheogiatang">Giá tăng</a></li>
+                                <li><a class="dropdown-item" href="/Products/Index?sortOrder=@ViewBag.saptheogiagiam">Giá giảm</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /store top filter -->
+                <!-- store products -->
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <!-- product -->
+                        <div class="col-md-4 col-xs-6">
+
+                            <div class="product">
+                                <div class="product-img">
+                                    @{
+                                        string ImagePath = "~/wwwroot/Image/" + item.Image;
+                                    }
+                                    <img src="@Url.Content(ImagePath)" alt="" style="margin-top: 20px">
+                                </div>
+                                <div class="product-body">
+                                    <p class="product-category">Danh muc</p>
+                                    <h3 class="product-name"><a href="#">@item.Name</a></h3>
+                                    <h4 class="product-price">@String.Format("{0:0,0}", @item.Price) <span class="currency"><u style="position: relative; top: -7px;">đ</u></span></h4>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-btns">
+                                        <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">So sánh sản phẩm</span></button>
+                                        <a href="/Products/Details?id=@item.ID_Product" class="quick-view"><i class="fa fa-eye"></i><span class="tooltip">Xem nhanh</span></a>
+                                    </div>
+                                </div>
+                                <div class="add-to-cart">
+                                    <a href="@Url.Action("ThemGiohang", "Cart", new {@IDsanpham = item.ID_Product, @strURL = Request.Url.ToString()})">
+
+                                        <button class="add-to-cart-btn">
+
+                                            <i class="fa fa-shopping-cart"></i> Thêm giỏ hàng
+
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <!-- /product -->
+                    }
+                </div>
+                <!-- /store products -->
+                <!-- store bottom filter -->
+                <div class="store-filter clearfix">
+                    <ul class="store-pagination">
+                        <li class="active">1</li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                    </ul>
+                </div>
+                <!-- /store bottom filter -->
+            </div>
+            <!-- /STORE -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

@@ -1,0 +1,206 @@
+﻿@model MobileDevice.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "AdminProduct", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="main-content-container container-fluid px-4">
+            <div class="page-header row no-gutters py-4">
+                <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                    <span class="text-uppercase page-subtitle">Thêm mới</span>
+                    <h3 class="page-title">Sản phẩm</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card card-small mb-4">
+
+                        <div class="card-body p-0 pb-3 text-center">
+                            <table class="table mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Tên danh mục</td>
+                                        <td>
+                                            @Html.DropDownList("ID_Category", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.ID_Category, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Màu sắc</td>
+                                        <td>
+                                            @Html.DropDownList("ID_Color", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.ID_Color, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Tên sản phẩm</td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Màn hình</td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Screen, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Screen, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Hệ điều hành</td>
+                                        <td>
+                                            @Html.EditorFor(model => model.SystemOperation, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.SystemOperation, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Camera sau</td>
+                                        <td>
+                                            @Html.EditorFor(model => model.RearCamera, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.RearCamera, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Camera trước</td>
+                                        <td>
+                                            @Html.EditorFor(model => model.FrontCamera, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.FrontCamera, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Ram</td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Ram, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Ram, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Bộ nhớ trong</td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Rom, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Rom, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Sim</td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Sim, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Sim, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Pin</td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Battery, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Battery, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Giá</td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Ảnh</td>
+                                        <td>
+                                            <img id="output" class="img-rounded" alt="Ảnh" width="180" height="200" src="~/wwwroot/img/notFoundProduct.png" />
+                                                <p><label for="ufile" style="cursor: pointer">Chọn file ảnh</label></p>
+                                                <input name="Image" id="ufile" type="file" style="display: none" onchange="loadFile(event)" />
+                                            @*@Html.EditorFor(model => model.Image, new
+                                            {
+                                                htmlAttributes = new
+                                                {
+                                                    @class = "form-control",
+                                                    @name = "ImageFile",
+                                                    @id = "ufile",
+                                                    @type = "file",
+                                                    @style = "display: none",
+                                                }
+                                            })*@
+                                            @*@Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control",  } })*@
+                                            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Mô tả ngắn</td>
+                                        <td>
+                                            @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Chi tiết</td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Detail, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Số lượng</td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Nguồn gốc</td>
+                                        <td>
+                                            @Html.EditorFor(model => model.Origin, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Origin, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">Trạng thái</td>
+                                        <td style="vertical-align: inherit">
+                                            <div class="d-flex align-items-center">
+                                                <label class="custom-control ios-switch">
+                                                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "ios-switch-control-input" } })
+                                                    <span class="ios-switch-control-indicator"></span>
+                                                </label>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="margin-left: 12px;">
+                <input type="submit" value="Thêm mới" class="mb-2 btn btn-success mr-2" />
+
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/Admin/AdminProduct/Index" class="mb-2 btn btn-info mr-2" role="button"
+       aria-pressed="true" style=" position: relative; left: 131px; top: -58px;">Quay lại</a>
+</div>
+<script>
+    //$("#ufile").on("change", function (event) {
+    //    var image = document.getElementById('output');
+    //    image.src = URL.createObjectURL(event.target.files[0]);
+    //});
+    var loadFile = function (event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>

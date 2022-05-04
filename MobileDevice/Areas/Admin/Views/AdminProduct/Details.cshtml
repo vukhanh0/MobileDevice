@@ -1,0 +1,181 @@
+﻿@model MobileDevice.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+
+    <div class="main-content-container container-fluid px-4">
+        <div class="page-header row no-gutters py-4">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                <span class="text-uppercase page-subtitle">Chi tiết</span>
+                <h3 class="page-title">Sản phẩm</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card card-small mb-4">
+
+                    <div class="card-body p-0 pb-3 text-center">
+                        <table class="table mb-0 table table-hover">
+                            <tbody>
+                                <tr>
+                                    <td style="vertical-align: inherit">Tên danh mục</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Category.Name)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Màu sắc</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Color.Name)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Tên sản phẩm</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Name)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Màn hình</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Screen)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Hệ điều hành</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.SystemOperation)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Camera sau</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.RearCamera)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Camera trước</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.FrontCamera)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Ram</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Ram)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Bộ nhớ trong</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Rom)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Sim</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Sim)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Pin</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Battery)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Giá</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Price)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Hình ảnh</td>
+                                    <td>
+                                        
+                                        @{
+                                            string ImagePath = "~/wwwroot/Image/" + @Html.DisplayFor(model => model.Image);
+                                        }
+                                        <img src="@Url.Content(ImagePath)" alt="" style="width: 300px; height: 200px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Mô tả ngắn</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.ShortDescription)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Chi tiết</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Detail)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Số lượng</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Amount)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Nguồn gốc</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Origin)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Ngày tạo</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.CreatedDate)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Người tạo</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.CreatedBy)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Ngày sửa đổi</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.ModifiedDate)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Người sửa đổi</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.ModifiedBy)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Trạng thái</td>
+                                    <td style="vertical-align: inherit">
+                                        <div class="d-flex align-items-center">
+                                            <label class="custom-control ios-switch" style="margin: auto;">
+                                                @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "ios-switch-control-input", @disable = "disable" } })
+                                                <span class="ios-switch-control-indicator"></span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<p>
+    <a href="/Admin/AdminProduct/Edit/@Model.ID_Product" class="mb-2 btn btn-success mr-2" role="button"
+       aria-pressed="true" style="margin-left: 26px;">Cập nhật</a>
+    <a href="/Admin/AdminProduct/Index" class="mb-2 btn btn-info mr-2" role="button"
+       aria-pressed="true" style=" position: relative; left: 5px;">Quay lại</a>
+</p>

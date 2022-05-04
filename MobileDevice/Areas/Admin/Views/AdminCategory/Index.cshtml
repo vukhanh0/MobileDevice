@@ -1,0 +1,94 @@
+﻿@model IEnumerable<MobileDevice.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-content-container container-fluid px-4">
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <h3 class="page-title">Danh mục sản phẩm</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card card-small mb-4">
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">
+                        <a href="/Admin/AdminCategory/Create" class="mb-2 btn btn-success mr-2" role="button" aria-pressed="true">Thêm mới</a>
+                    </h6>
+                </div>
+                <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col" class="border-0">Tên danh mục</th>
+                                <th scope="col" class="border-0">Trạng thái</th>
+                                <th scope="col" class="border-0"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="row_@item.ID_Category">
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <label class="custom-control ios-switch" style="margin: auto;">
+                                                <input type="checkbox" class="ios-switch-control-input" checked="@item.Status" disabled>
+                                                <span class="ios-switch-control-indicator"></span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="/Admin/AdminCategory/Edit/@item.ID_Category" class="mb-2 btn btn-warning mr-2" role="button" aria-pressed="true">Cập nhật</a>
+                                        <a href="/Admin/AdminCategory/Details/@item.ID_Category" class="mb-2 btn btn-info mr-2" role="button" aria-pressed="true">Chi tiết</a>
+                                        <a class="delete-link mb-2 btn btn-danger mr-2" href="#" onclick="ConfirmDelete(@item.ID_Category)">Xóa</a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Category">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Bạn có chắc muốn xóa danh mục này không?</h4>
+            </div>
+            <div class="modal-footer">
+                
+                    <button type="submit" class="btn btn-primary" onclick="DeleteCategory()">Đồng ý</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="hidden" />
+</div>
+<script>
+    var ConfirmDelete = function (Id_Category) {
+        $("#hidden").val(Id_Category);
+        $("#Category").modal('show');
+    }
+
+    var DeleteCategory = function () {
+        var carteId = $("#hidden").val();
+        $.ajax({
+            type: "POST",
+            url: "/AdminCategory/DeleteCategory",
+            data: { Id_Category: carteId },
+            success: function (result) {
+                $("#Category").modal('hide');
+                $("#row_" + carteId).remove();
+            }
+        })
+    }
+</script>

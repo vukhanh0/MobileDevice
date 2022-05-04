@@ -1,0 +1,61 @@
+﻿@model MobileDevice.Models.Color
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="main-content-container container-fluid px-4">
+        <div class="page-header row no-gutters py-4">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                <span class="text-uppercase page-subtitle">Thêm mới</span>
+                <h3 class="page-title">Màu sắc</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card card-small mb-4">
+
+                    <div class="card-body p-0 pb-3 text-center">
+                        <table class="table mb-0">
+                            <tbody>
+
+                                <tr>
+                                    <td style="vertical-align: inherit">Màu sắc</td>
+                                    <td style="vertical-align: inherit">
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10" style="margin-left: 12px;">
+            <input type="submit" value="Thêm mới" class="mb-2 btn btn-success mr-2" />
+
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    <a href="/Admin/AdminColor/Index" class="mb-2 btn btn-info mr-2" role="button"
+       aria-pressed="true" style=" position: relative; left: 123px; top: -57px;">Quay lại</a>
+</div>

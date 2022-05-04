@@ -1,0 +1,112 @@
+﻿@using MobileDevice.DTO
+@model List<CartDTO>
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Giỏ hàng</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href="/Home/Index">Trang chủ</a></li>
+                    <li class="active">Giỏ hàng</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+<div class="table-responsive" style="font-size: 15px">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+
+                <th class="col-md-2" style="text-align: center">STT</th>
+                <th class="col-md-2">Sản phẩm</th>
+                <th class="col-md-2"></th>
+                <th class="col-md-3" style="padding-left: 60px;">Số lượng</th>
+                <th class="col-md-1">Đơn giá</th>
+                <th class="col-md-1">Thành tiền</th>
+                <th class="col-md-1">
+                    <a style="cursor: pointer;"><i class="fa fa-trash" style="color: red;"></i></a>
+                </th>
+            </tr>
+        </thead>
+        <tbody style="vertical-align: middle;">
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td style="vertical-align: inherit; text-align: center">
+                        1
+                    </td>
+
+                    <td>
+                        <img src="~/wwwroot/Image/@item.sHinhanhsanpham" style="width: 190px; height: 127px" />
+                    </td>
+                    <td style="vertical-align: inherit">
+                        @item.sTensanpham
+                    </td>
+
+                    <td style="vertical-align: inherit">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <a class="btn btn-link col-md-3" href="@Url.Action("CapnhatGiohangGiam","Cart",new { @iMaSp = item.iIDsanpham })"
+                                   onclick="this.parentNode.querySelector('input[type=number]').stepDown(); thanhtien()">
+                                    @*<button type="submit">*@ <i class="fa fa-minus"></i>@*</button>*@
+                                </a>
+
+                                <input id="soluong" min="0" name="iSoluong" value="@item.iSoluong" type="number"
+                                       class="form-control col-md-6" style="width: 75px;" />
+
+                                <a class="btn btn-link col-md-3" href="@Url.Action("CapnhatGiohangTang","Cart",new { @iMaSp = item.iIDsanpham })"
+                                   onclick="this.parentNode.querySelector('input[type=number]').stepUp(); thanhtien()">
+                                    @*<button type="submit">*@ <i class="fa fa-plus"></i>@*</button>*@
+
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="vertical-align: inherit">
+                        <p id="dongia" name="dDongia">@String.Format("{0:0,0}", item.dDongia)</p>
+                    </td>
+                    <td style="vertical-align: inherit">
+                        <p id="thanhtien" name="dThanhtien"> @String.Format("{0:0,0}", item.dThanhtien)</p>
+                    </td>
+
+                    <td class="col-md-2" style="vertical-align: inherit">
+                        @Html.ActionLink("Xóa", "XoaGiohang", new { @iMaSp = item.iIDsanpham })
+                        @*<a style="cursor: pointer;"><i class="fa fa-trash" style="color: red;"></i></a>*@
+                    </td>
+                </tr>
+            }
+
+            <tr style="font-size:17px">
+                <th colspan="5" style="text-align: center;">Tổng tiền</th>
+                <td colspan="2"><strong class="order-total"> @String.Format("{0:0,0}", ViewBag.Tongtien)</strong></td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div class="product-details">
+        <div class="add-to-cart">
+            <a href="/Cart/Checkout/">
+                <button class="add-to-cart-btn" style="position: relative; right: -1211px;">
+                    <i class="fa fa-shopping-cart"></i>Đặt
+                    hàng
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+

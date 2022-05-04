@@ -1,0 +1,301 @@
+﻿@model MobileDevice.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Sản phẩm</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href="/Home/Index">Trang chủ</a></li>
+                    <li><a href="/Products/Index">Danh mục</a></li>
+                    <li class="active">Sản phẩm</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- Product main img -->
+            <div class="col-md-5 col-md-push-2">
+                <div id="product-main-img">
+                    <div class="product-preview">
+                        @{
+                            string ImagePath = "~/wwwroot/Image/" + @Model.Image;
+                        }
+                        <img src="@Url.Content(ImagePath)" alt="">
+                    </div>
+
+                    @*<div class="product-preview">
+                            <img src="~/wwwroot/img/product03.png" alt="">
+                        </div>
+
+                        <div class="product-preview">
+                            <img src="~/wwwroot/img/product06.png" alt="">
+                        </div>
+
+                        <div class="product-preview">
+                            <img src="~/wwwroot/img/product08.png" alt="">
+                        </div>*@
+                </div>
+            </div>
+            <!-- /Product main img -->
+            <!-- Product thumb imgs -->
+            <div class="col-md-2  col-md-pull-5">
+                @*<div id="product-imgs">
+                        <div class="product-preview">
+                            <img src="~/wwwroot/img/product01.png" alt="">
+                        </div>
+
+                        <div class="product-preview">
+                            <img src="~/wwwroot/img/product03.png" alt="">
+                        </div>
+
+                        <div class="product-preview">
+                            <img src="~/wwwroot/img/product06.png" alt="">
+                        </div>
+
+                        <div class="product-preview">
+                            <img src="~/wwwroot/img/product08.png" alt="">
+                        </div>
+                    </div>*@
+            </div>
+            <!-- /Product thumb imgs -->
+            <!-- Product details -->
+            <div class="col-md-5">
+
+                <div class="product-details">
+                    <h2 class="product-name">@Model.Name</h2>
+
+                    <div class="product-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+
+                    <div>
+                        <h3 class="product-price">@String.Format("{0:0,0}", Model.Price) <span class="currency"><u style="position: relative; top: -7px;">đ</u></span></span></h3>
+                    </div>
+
+                    <div class="product-options">
+
+                        <b>Chọn màu sắc:</b>
+                        <select class="input-select" style="width: 100px; right: -16px; position: relative;">
+                            <option value="white">Trắng</option>
+                            <option value="black">Đen</option>
+                            <option value="blue">Xanh</option>
+                        </select>
+
+                    </div>
+
+
+                    <div>
+                        <b>Chọn số lượng:</b>
+                        <a class="btn btn-link"
+                           onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                            <i class="fa fa-minus"></i>
+                        </a>
+                        <input id="form1" min="0" name="quantity" value="1" type="number"
+                               class="form-control" style="width: 75px; position: relative; top: -50px; right: -169px;" />
+                        <a class="btn btn-link" style="    position: relative; top: -92px; right: -243px;"
+                           onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+
+                    <div class="add-to-cart">
+                        <a href="@Url.Action("ThemGiohang", "Cart", new {@IDsanpham = Model.ID_Product, @strURL = Request.Url.ToString()})">
+                            <button class="add-to-cart-btn">
+
+                                <i class="fa fa-shopping-cart"></i> Thêm giỏ hàng
+
+                            </button>
+                        </a>
+                    </div>
+                    <ul class="product-btns">
+
+                        <li><a href="#"><i class="fa fa-exchange"></i> So sánh sản phẩm</a></li>
+                    </ul>
+
+                    <ul class="product-links">
+                        <li>Danh mục:</li>
+                        <li><a href="#">Iphone</a></li>
+                    </ul>
+
+                    <ul class="product-links">
+                        <li>Chia sẻ:</li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+                    </ul>
+
+                </div>
+            </div>
+            <!-- /Product details -->
+            <!-- Product tab -->
+            <div class="col-md-12">
+                <div id="product-tab">
+                    <!-- product tab nav -->
+                    <ul class="tab-nav">
+                        <li class="active"><a data-toggle="tab" href="#tab1">Mô tả</a></li>
+                        <li><a data-toggle="tab" href="#tab2">Chi tiết</a></li>
+                    </ul>
+                    <!-- /product tab nav -->
+                    <!-- product tab content -->
+                    <div class="tab-content">
+                        <!-- tab1  -->
+                        <div id="tab1" class="tab-pane in active">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>
+                                        @Model.ShortDescription
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /tab1  -->
+                        <!-- tab2  -->
+                        <div id="tab2" class="tab-pane in">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered table-hover">
+                                        <tbody>
+                                            <tr>
+                                                <th>Tên sản phẩm</th>
+                                                <td>@Model.Name</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Màn hình</th>
+                                                <td>@Model.Screen</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Hệ điều hành</th>
+                                                <td>@Model.SystemOperation</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Camera sau</th>
+                                                <td>@Model.RearCamera</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Camera trước</th>
+                                                <td>@Model.FrontCamera</td>
+                                            </tr>
+                                            <tr>
+                                                <th>RAM</th>
+                                                <td>@Model.Ram</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Bố nhớ trong</th>
+                                                <td>@Model.Rom</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Sim</th>
+                                                <td>@Model.Sim</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Pin</th>
+                                                <td>@Model.Battery</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nguồn gốc</th>
+                                                <td>@Model.Origin</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /tab2  -->
+                    </div>
+                    <!-- /product tab content  -->
+                </div>
+            </div>
+            <!-- /product tab -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+<!-- Section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <h3 class="title">Sản phẩm liên quan</h3>
+                </div>
+            </div>
+
+
+
+            <div class="clearfix visible-sm visible-xs"></div>
+
+
+            <!-- product -->
+            <div class="col-md-3 col-xs-6">
+                <div class="product">
+                    <div class="product-img">
+                        <img src="./img/product04.png" alt="">
+                    </div>
+                    <div class="product-body">
+                        <p class="product-category">Category</p>
+                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                        <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                        <div class="product-rating">
+                        </div>
+                        <div class="product-btns">
+                            <button class="add-to-wishlist">
+                                <i class="fa fa-heart-o"></i><span class="tooltipp">
+                                    add
+                                    to wishlist
+                                </span>
+                            </button>
+                            <button class="add-to-compare">
+                                <i class="fa fa-exchange"></i><span class="tooltipp">
+                                    add
+                                    to compare
+                                </span>
+                            </button>
+                            <button class="quick-view">
+                                <i class="fa fa-eye"></i><span class="tooltipp">
+                                    quick
+                                    view
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="add-to-cart">
+                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /product -->
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /Section -->

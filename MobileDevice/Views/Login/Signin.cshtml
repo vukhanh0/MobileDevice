@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewBag.Title = "Signin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Đăng ký</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href="/Home/Index/">Trang chủ</a></li>
+                    <li class="active">Đăng ký</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<!-- Đăng nhập -->
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-10">
+                <div class="wrap d-md-flex">
+                    <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center">
+                        <div class="text w-100">
+                            <h2>Bạn đã có tài khoản?</h2>
+                            <p>Đăng nhập ngay để có thể mua sắp một cách thuận tiên hơn!</p>
+                            <a href="/Login/Login" class="btn btn-white btn-outline-white">Đăng nhập</a>
+                        </div>
+                    </div>
+                    <div class="login-wrap p-4 p-lg-5 order-md-last">
+                        <div class="d-flex">
+                            <div class="w-100">
+                                <h1 class="mb-4">Tạo tài khoản</h1>
+                            </div>
+                            <div class="w-100">
+                                <p class="social-media d-flex justify-content-end">
+                                    <a href="#"
+                                       class="social-icon d-flex align-items-center justify-content-center">
+                                        <span class="fa fa-facebook"></span>
+                                    </a>
+                                    <a href="#"
+                                       class="social-icon d-flex align-items-center justify-content-center">
+                                        <span class="fa fa-twitter"></span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                        <form action="/Login/Signin/" class="signin-form" method="post">
+                            @using (Html.BeginForm())
+                            {
+                                <div class="form-group mb-3">
+                                    <label class="label" for="name">Tên đăng nhập</label>
+                                    <input type="text" class="form-control" placeholder="Tên đăng nhập"
+                                           id="signin_dangnhap" onblur="val_dangnhap()" name="Signin_Username">
+                                    <span class="hide" id="error_dangnhap"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="label" for="name">Email</label>
+                                    <input type="text" class="form-control" placeholder="Email" 
+                                           id="signin_email" onblur="val_email()" name="Signin_Email">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="label" for="name">Họ tên</label>
+                                    <input type="text" class="form-control" placeholder="Họ tên" 
+                                           id="signin_hoten" onblur="val_hoten()" name="Signin_Fullname">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="label" for="password">Mật khẩu</label>
+                                    <input type="password" class="form-control" placeholder="Mật khẩu" 
+                                           id="signin_matkhau" name="Signin_Password">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="label" for="password">Nhập lại mật khẩu</label>
+                                    <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" 
+                                           id="signin_matkhau2" onblur="val_pass2()" name="Signin_Password2">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="form-control btn btn-primary submit px-3" onclick="checkrong()">
+                                        Đăng ký
+                                    </button>
+                                </div>
+                                <div class="form-group d-md-flex">
+                                    <div class="w-50 text-left">
+
+                                    </div>
+                                    <div class="w-50 text-md-right">
+                                        <a href="/Login/Login">Tôi đã có tài khoản</a>
+                                    </div>
+                                </div>
+                            }
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /Đăng nhập-->
+
+
+
+

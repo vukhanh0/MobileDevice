@@ -1,0 +1,113 @@
+﻿@model IEnumerable<MobileDevice.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-content-container container-fluid px-4">
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <h3 class="page-title">Sản phẩm</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card card-small mb-4">
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">
+                        <a href="/Admin/AdminProduct/Create" class="mb-2 btn btn-success mr-2" role="button" aria-pressed="true">Thêm mới</a>
+                    </h6>
+                </div>
+                <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0 table-hover">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col" class="border-0">Tên sản phẩm</th>
+                                <th scope="col" class="border-0">Màu sắc</th>
+                                <th scope="col" class="border-0">Giá</th>
+                                <th scope="col" class="border-0">Hình ảnh</th>
+                                <th scope="col" class="border-0">Số lượng</th>
+                                @*<th scope="col" class="border-0">Ngày tạo</th>
+                                <th scope="col" class="border-0">Người tạo</th>*@
+                                <th scope="col" class="border-0">Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="row_@item.ID_Product">
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Color.Name)</td>
+                                    @*<td>@Html.DisplayFor(modelItem => item.Price)</td>*@
+                                    <td>@String.Format("{0:0,0}", item.Price)</td>
+                                    <td>
+                                        @{
+                                            string ImagePath = "~/wwwroot/Image/" + @Html.DisplayFor(modelItem => item.Image);
+                                        }
+                                        <img src="@Url.Content(ImagePath)" alt="" style="width: 120px; height: 80px;">
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                                    @*<td>@Html.DisplayFor(modelItem => item.CreatedDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CreatedBy)</td>*@
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <label class="custom-control ios-switch" style="margin: auto;">
+                                                <input type="checkbox" class="ios-switch-control-input" checked="@item.Status" disabled>
+                                                <span class="ios-switch-control-indicator"></span>
+                                            </label>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <a href="/Admin/AdminProduct/Edit/@item.ID_Product" class="mb-2 btn btn-warning mr-2" role="button" aria-pressed="true">Cập nhật</a>
+                                        <a href="/Admin/AdminProduct/Details/@item.ID_Product" class="mb-2 btn btn-info mr-2" role="button" aria-pressed="true">Chi tiết</a>
+                                        @*<a href="/Admin/AdminCategory/Delete/@item.ID_Category" class="btn btn-danger btn-lg btn-sm" role="button" aria-pressed="true">Xóa</a>*@
+                                    <a class="delete-link mb-2 btn btn-danger mr-2" href="#" onclick="ConfirmDelete(@item.ID_Product)">Xóa</a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Product">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Bạn có chắc muốn xóa sản phẩm này không?</h4>
+            </div>
+            <div class="modal-footer">
+
+                <button type="submit" class="btn btn-primary" onclick="DeleteProduct()">Đồng ý</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="hidden" />
+</div>
+<script>
+    var ConfirmDelete = function (Id_Product) {
+        $("#hidden").val(Id_Product);
+        $("#Product").modal('show');
+    }
+
+    var DeleteProduct = function () {
+        var carteId = $("#hidden").val();
+        $.ajax({
+            type: "POST",
+            url: "/AdminProduct/DeleteProduct",
+            data: { Id_Product: carteId },
+            success: function (result) {
+                $("#Product").modal('hide');
+                $("#row_" + carteId).remove();
+            }
+        })
+    }
+</script>

@@ -1,0 +1,140 @@
+﻿@using MobileDevice.DTO
+@using MobileDevice.Models
+@model List<CartDTO>
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Đặt hàng</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href="/Home/Index/">Trang chủ</a></li>
+                    <li class="active">Đặt hàng</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-7">
+                <!-- Billing Details -->
+                <div class="billing-details">
+                    <div class="section-title">
+                        <h3 class="title">Thông tin khách hàng</h3>
+                    </div>
+                    @{
+                        Account acc = (Account)Session["Taikhoan"];
+                    }
+                    @using (Html.BeginForm())
+                    {
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1" style="font-size: 17px; ">&nbsp;Họ và tên&nbsp;</span>
+                            <input type="text" class="form-control" aria-label="Username" value="@acc.FullName"
+                                   aria-describedby="basic-addon1">
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1" style="font-size: 17px; ">&ensp;&nbsp; Địa chỉ&ensp;&nbsp; </span>
+                            <input type="text" class="form-control" aria-label="Username" value="@acc.Address"
+                                   aria-describedby="basic-addon1">
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1" style="font-size: 17px; ">Điện thoại</span>
+                            <input type="text" class="form-control" aria-label="Username" value="@acc.Phone"
+                                   aria-describedby="basic-addon1">
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1" style="font-size: 17px; ">&nbsp;Ngày đặt&nbsp;</span>
+                            <input type="text" class="form-control" aria-label="Username" value="@DateTime.Now.ToShortDateString()"
+                                   aria-describedby="basic-addon1" disabled>
+                        </div>
+                    }
+
+                </div>
+                <!-- /Billing Details -->
+                <!-- Order notes -->
+                <div class="order-notes">
+                    <textarea class="input" placeholder="Ghi chú thêm" name="Note"></textarea>
+                </div>
+                <!-- /Order notes -->
+            </div>
+
+            <!-- Order Details -->
+            <div class="col-md-5 order-details">
+                <div class="section-title text-center">
+                    <h3 class="title">Thông tin đơn hàng</h3>
+                </div>
+                <div class="order-summary">
+                    <div class="order-col">
+                        <div><strong>Sản phẩm</strong></div>
+
+                        <div><strong>Đơn giá</strong></div>
+                    </div>
+                    <div class="order-products">
+                        @foreach (var item in Model)
+                        {
+                            <div class="order-col">
+                                <div style="width: 165px"><img src="~/wwwroot/Image/@item.sHinhanhsanpham" style="width: 128px; height: 84px" /></div>
+                                <div>@item.sTensanpham</div>
+
+                                <div>@String.Format("{0:0,0}", item.dThanhtien)</div>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="order-col">
+                        <div>Phí ship</div>
+                        <div><strong>Miễn phí</strong></div>
+                    </div>
+                    <div class="order-col">
+                        <div><strong>Tổng tiển</strong></div>
+                        <div><strong class="order-total">@String.Format("{0:0,0}", ViewBag.Tongtien)</strong></div>
+                    </div>
+                </div>
+
+                <div class="input-checkbox">
+                    <input type="checkbox" id="terms">
+                    <label for="terms">
+                        <span></span>
+                        Tôi đã đọc và chấp nhận các điều khoản & điều kiện
+                    </label>
+                </div>
+                @using (Html.BeginForm())
+                {
+                    @*<a href="/Cart/Checkout/" class="primary-btn order-submit">*@
+                    @*<button class="add-to-cart-btn" type="submit"> ĐẶT HÀNG</button>*@
+                    @*</a>*@
+            <div class="product-details">
+                <div class="add-to-cart">
+                   <br />
+                        <button class="add-to-cart-btn" style="width: 426px;">
+                           Đặt hàng
+                        </button>
+                   
+                </div>
+            </div>
+                }
+
+            </div>
+            <!-- /Order Details -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

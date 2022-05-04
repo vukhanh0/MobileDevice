@@ -1,0 +1,201 @@
+﻿@model MobileDevice.Models.Product
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Color.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Screen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Screen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SystemOperation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SystemOperation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RearCamera)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RearCamera)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FrontCamera)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FrontCamera)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ram)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Battery)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Battery)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Detail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Detail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Origin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Origin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
