@@ -21,6 +21,22 @@ namespace MobileDevice.Areas.Admin.Controllers
             return View(bills.ToList());
         }
 
+        public JsonResult DeleteBill(int Id_Bill)
+        {
+            bool result = false;
+            Bill ca = db.Bills.Where(p => p.ID_Bill == Id_Bill).SingleOrDefault();
+            BillDetail ca2 = db.BillDetails.Where(p => p.ID_Bill == Id_Bill).SingleOrDefault();
+            if (ca != null)
+            {
+                db.Bills.Remove(ca);
+                db.BillDetails.Remove(ca2);
+                db.SaveChanges();
+                result = true;
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
         // GET: Admin/AdminBill/Details/5
         public ActionResult Details(int? id)
         {
@@ -89,7 +105,7 @@ namespace MobileDevice.Areas.Admin.Controllers
                     {
                         Product product_Detail = db.Products.Where(p => p.ID_Product == item.ID_Product).FirstOrDefault();
                         product_Detail.Amount -= item.Amount;
-                        //product_Detail.viewcount += item.quanity;
+                        product_Detail.sellnumber += item.Amount;
                     }
                 }
                 db.SaveChanges();

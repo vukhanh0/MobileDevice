@@ -1,0 +1,104 @@
+﻿@model MobileDevice.Models.Account
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <div class="main-content-container container-fluid px-4">
+        <div class="page-header row no-gutters py-4">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                <span class="text-uppercase page-subtitle">Chi tiết</span>
+                <h3 class="page-title">Danh mục sản phẩm</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card card-small mb-4">
+
+                    <div class="card-body p-0 pb-3 text-center">
+                        <table class="table mb-0">
+                            <tbody>
+
+                                <tr>
+                                    <td style="vertical-align: inherit">Chức vụ</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Role.Name)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Tài khoản</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.UserName)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Họ và tên</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.FullName)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Số điện thoại</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Phone)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Địa chỉ</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Address)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Email</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Email)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Trạng thái</td>
+                                    <td style="vertical-align: inherit">
+                                        <div class="d-flex align-items-center">
+                                            <label class="custom-control ios-switch" style="margin: auto;">
+                                                @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "ios-switch-control-input" } })
+                                                <span class="ios-switch-control-indicator"></span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Hình ảnh</td>
+                                    <td>
+                                        @{
+                                            string ImagePath = "~/wwwroot/Image/" + @Html.DisplayFor(model => model.Avatar);
+                                        }
+                                        <img src="@Url.Content(ImagePath)" alt="" style="width: 300px; height: 200px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: inherit">Quản lý</td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.IsManager)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<p>
+    <a href="/Admin/AdminAccount/Edit/@Model.ID_Account" class="mb-2 btn btn-success mr-2" role="button"
+       aria-pressed="true" style="margin-left: 26px;">Cập nhật</a>
+    <a href="/Admin/AdminAccount/Index" class="mb-2 btn btn-info mr-2" role="button"
+       aria-pressed="true" style=" position: relative; left: 5px;">Quay lại</a>
+</p>

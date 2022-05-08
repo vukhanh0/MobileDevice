@@ -19,17 +19,25 @@ namespace MobileDevice.Areas.Admin.Controllers
             var result = dao.Login(account.UserName, account.Password);
             if (result == 2)
             {
-                var user = db.Accounts.SingleOrDefault(u => u.UserName == account.UserName);
-                var userSession = new AccountDTO();
-                userSession.UserName = user.UserName;
-                userSession.Password = user.Password;
-                Session["Taikhoan"] = user;
-                Session["username"] = user.UserName;
-                Session["password"] = user.Password;
-                Session["fullname"] = user.FullName;
-                Session["email"] = user.Email;
-                Session.Add(CommonContants.ADMIN_SESSION, userSession);
-                return RedirectToAction("Index", "AdminHome");
+                var user = db.Accounts.Where(p => p.Status == true && p.ID_Role == 2).SingleOrDefault(u => u.UserName == account.UserName);
+                if (user == null)
+                {
+                    ViewBag.thongbao = "Bạn không có quyền đăng nhập!";
+                }
+                else
+                {
+                    var userSession = new AccountDTO();
+                    userSession.UserName = user.UserName;
+                    userSession.Password = user.Password;
+                    Session["Taikhoan"] = user;
+                    Session["username"] = user.UserName;
+                    Session["password"] = user.Password;
+                    Session["fullname"] = user.FullName;
+                    Session["email"] = user.Email;
+                    Session.Add(CommonContants.ADMIN_SESSION, userSession);
+                    return RedirectToAction("Index", "AdminHome");
+                }
+
             }
             else if (result == 0)
             {

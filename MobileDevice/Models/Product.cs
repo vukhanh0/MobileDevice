@@ -68,6 +68,8 @@ namespace MobileDevice.Models
 
         public int? Amount { get; set; }
 
+        public float? sellnumber { get; set; }
+
         [StringLength(255)]
         public string Origin { get; set; }
 

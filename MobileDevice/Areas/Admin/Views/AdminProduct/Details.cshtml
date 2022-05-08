@@ -90,7 +90,8 @@
                                 <tr>
                                     <td style="vertical-align: inherit">Giá</td>
                                     <td>
-                                        @Html.DisplayFor(model => model.Price)
+                                       
+                                        @String.Format("{0:0,0}", @Model.Price)
                                     </td>
                                 </tr>
                                 <tr>

@@ -1,8 +1,24 @@
-﻿
+﻿@using MobileDevice.DTO
+@using MobileDevice.Models
 @{
     ViewBag.Title = "Xacnhandonhang";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Xacnhandonhang</h2>
+@{
+    Account acc = (Account)Session["Taikhoan"];
+}
+<div class="container" style="text-align: center">
+    <br /><br />
+    <img src="~/wwwroot/img/icon-dat-hang-thanh-cong-09.png" alt="Đặt hàng thành công" style="width: 266px; height:200px" />
+    <p style="font-size: 25px; font-weight: bold">Đặt hàng thành công</p>
+    @using (Html.BeginForm())
+    {
+        <p style="font-size: 15px">Cảm ơn bạn <b>@acc.FullName</b> đã cho chúng tôi được phục vụ!</p>
+        <p>Đơn hàng của bạn đã được hệ thống xác nhận</p>
+        <b>Mọi thắc mắc xin vui lòng liên hệ: 0982 99 37 36</b>
+    }
+    <br />
+    <a href="/Home/Index/" class="btn btn-danger" role="button" data-bs-toggle="button">Về trang chủ</a>
+    <br /><br />
+</div>
 

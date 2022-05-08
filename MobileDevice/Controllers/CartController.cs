@@ -87,7 +87,7 @@ namespace MobileDevice.Controllers
                 sanpham.iSoluong++;
             }
             return RedirectToAction("Cart");
-        } 
+        }
         public ActionResult CapnhatGiohangGiam(int iMaSp, FormCollection f)
         {
             List<CartDTO> lstGiohang = Laygiohang();
@@ -116,7 +116,7 @@ namespace MobileDevice.Controllers
             Session["tongsoluong"] = TongSoLuong();
             ViewBag.Tongtien = Tongtien();
             return View(lstGiohang);
-        }       
+        }
         [HttpGet]
         public ActionResult Checkout()
         {
@@ -136,14 +136,16 @@ namespace MobileDevice.Controllers
         [HttpPost]
         public ActionResult Checkout(FormCollection collection)
         {
+            var Checkout_Address = collection["Checkout_Address"];
+            var Checkout_Phone = collection["Checkout_Phone"];
             Bill ddh = new Bill();
             Account kh = (Account)Session["Taikhoan"];
             List<CartDTO> gh = Laygiohang();
             ddh.ID_Account = kh.ID_Account;
             ddh.ReceiverName = kh.FullName;
-            ddh.ReceiverAddress = kh.Address;
+            ddh.ReceiverAddress = !String.IsNullOrEmpty(kh.Address) ? kh.Address : Checkout_Address;
             ddh.ReceiverEmail = kh.Email;
-            ddh.ReceiverPhone = kh.Phone;
+            ddh.ReceiverPhone = !String.IsNullOrEmpty(kh.Phone) ? kh.Phone : Checkout_Phone;
             ddh.Status = true;
             ddh.PayType = "Thanh toán khi nhận hàng";
             ddh.Note = collection["Note"];
@@ -161,6 +163,8 @@ namespace MobileDevice.Controllers
                 bill_detail.CurrentlyPrice = Convert.ToDecimal(item.iSoluong * item.dDongia);
                 db.BillDetails.Add(bill_detail);
             }
+
+
             db.SaveChanges();
             Session["Giohang"] = null;
             return RedirectToAction("Xacnhandonhang", "Cart");

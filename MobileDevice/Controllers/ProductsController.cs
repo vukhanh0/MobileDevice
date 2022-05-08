@@ -23,7 +23,9 @@ namespace MobileDevice.Controllers
             ViewBag.saptheogiatang = sortOrder == "gia" ? "" : "gia";
             ViewBag.saptheogiagiam = sortOrder == "gia_desc" ? "" : "gia_desc";
 
-            ViewBag.demsp = 
+            ViewBag.SPCaoCap = sortOrder == "caocap" ? "" : "caocap";
+            ViewBag.SPTamtrung = sortOrder == "tamtrung" ? "" : "tamtrung";
+
 
             ViewBag.iphone = sortOrder == "iphone" ? "" : "iphone";
             ViewBag.samsung = sortOrder == "samsung" ? "" : "samsung";
@@ -75,6 +77,12 @@ namespace MobileDevice.Controllers
                     break;
                 case "sony":
                     product = product.Where(s => s.ID_Category == 5).OrderBy(s => s.ID_Product);
+                    break;
+                case "caocap":
+                    product = product.Where(s => s.Price > 15000000).OrderBy(s => s.ID_Product);
+                    break;
+                case "tamtrung":
+                    product = product.Where(s => s.Price <= 15000000).OrderBy(s => s.ID_Product);
                     break;
                 default:
                     product = product.OrderBy(s => s.ID_Product);

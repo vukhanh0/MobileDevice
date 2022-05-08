@@ -13,7 +13,7 @@ namespace MobileDevice.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var pro = db.Products.Select(n => n);
+            var pro = db.Products.Select(n => n).OrderByDescending(p=>p.ID_Product).Take(6);
             return View(pro);
         }
 

@@ -66,6 +66,10 @@
         <dd>
             @Html.DisplayFor(model => model.PayType)
         </dd>
+        <dt>Tổng tiền</dt>
+        <dd>
+            @String.Format("{0:0,0}", ViewBag.Tongtien)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Status)
         </dt>

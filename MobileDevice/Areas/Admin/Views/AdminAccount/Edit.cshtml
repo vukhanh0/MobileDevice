@@ -1,25 +1,26 @@
-﻿@model MobileDevice.Models.Bill
+﻿@model MobileDevice.Models.Account
 
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var ImagePath = "~/wwwroot/Image/" + Model.Avatar;
 }
 
+<h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID_Bill)
+        @Html.HiddenFor(model => model.ID_Account)
 
         <div class="main-content-container container-fluid px-4">
             <div class="page-header row no-gutters py-4">
                 <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
                     <span class="text-uppercase page-subtitle">Cập nhật</span>
-                    <h3 class="page-title">Đơn hàng</h3>
+                    <h3 class="page-title">Tài khoản nhân viên</h3>
                 </div>
             </div>
             <div class="row">
@@ -30,29 +31,38 @@
                                 <tbody>
                                     <tr>
                                         <td style="vertical-align: inherit">
-                                            Tên người nhận
+                                            Chức vụ
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.ReceiverName, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                                            @Html.ValidationMessageFor(model => model.ReceiverName, "", new { @class = "text-danger" })
+                                            @Html.DropDownList("ID_Role", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.ID_Role, "", new { @class = "text-danger" })
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: inherit">
-                                            Địa chỉ
+                                            Tài khoản
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.ReceiverAddress, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                                            @Html.ValidationMessageFor(model => model.ReceiverAddress, "", new { @class = "text-danger" })
+                                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: inherit">
-                                            Email
+                                            Mật khẩu
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.ReceiverEmail, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                                            @Html.ValidationMessageFor(model => model.ReceiverEmail, "", new { @class = "text-danger" })
+                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="vertical-align: inherit">
+                                            Họ và tên
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
                                         </td>
                                     </tr>
                                     <tr>
@@ -60,25 +70,25 @@
                                             Số điện thoại
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.ReceiverPhone, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                                            @Html.ValidationMessageFor(model => model.ReceiverPhone, "", new { @class = "text-danger" })
+                                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: inherit">
-                                            Ghi chú thêm
+                                            Địa chỉ
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                                            @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+                                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: inherit">
-                                            Thanh toán
+                                            Email
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.PayType, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                                            @Html.ValidationMessageFor(model => model.PayType, "", new { @class = "text-danger" })
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                         </td>
                                     </tr>
                                     <tr>
@@ -99,20 +109,21 @@
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: inherit">
-                                            Ngày đặt hàng
+                                            Hình ảnh
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                                            @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+                                            <img id="output" class="img-rounded" alt="Ảnh" width="180" height="200" src="@Url.Content(@ImagePath)" />
+                                            <p><label for="ufile" style="cursor: pointer">Chọn file ảnh</label></p>
+                                            <input name="Image" id="ufile" type="file" style="display: none" onchange="loadFile(event)" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align: inherit">
-                                            Ngày xác nhận
+                                            Quản lý
                                         </td>
                                         <td>
-                                            @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                                            @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
+                                            @Html.EditorFor(model => model.IsManager)
+                                            @Html.ValidationMessageFor(model => model.IsManager, "", new { @class = "text-danger" })
                                         </td>
                                     </tr>
                                 </tbody>
@@ -133,6 +144,12 @@
 }
 
 <div>
-    <a href="/Admin/AdminBill/Index" class="mb-2 btn btn-info mr-2" role="button"
+    <a href="/Admin/AdminAccount/Index" class="mb-2 btn btn-info mr-2" role="button"
        aria-pressed="true" style=" position: relative; left: 123px; top: -57px;">Quay lại</a>
 </div>
+<script>
+    var loadFile = function (event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>

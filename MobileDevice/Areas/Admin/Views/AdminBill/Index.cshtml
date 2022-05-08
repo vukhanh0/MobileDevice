@@ -15,9 +15,6 @@
         <div class="col">
             <div class="card card-small mb-4">
                 <div class="card-header border-bottom">
-                    <h6 class="m-0">
-                        <a href="/Admin/AdminBill/Create" class="mb-2 btn btn-success mr-2" role="button" aria-pressed="true">Thêm mới</a>
-                    </h6>
                 </div>
                 <div class="card-body p-0 pb-3 text-center">
                     <table class="table mb-0">
@@ -52,8 +49,14 @@
                                     </td>
                                     <td> @Html.DisplayFor(modelItem => item.CreatedDate)</td>
                                     <td>
-                                        <a href="/Admin/AdminBill/Edit/@item.ID_Bill" class="mb-2 btn btn-warning mr-2" role="button" aria-pressed="true">Cập nhật</a>
-                                        <a href="/Admin/AdminBill/Details/@item.ID_Bill" class="mb-2 btn btn-info mr-2" role="button" aria-pressed="true">Chi tiết</a>
+                                        @if (item.Status)
+                                        {
+                                            <a href="/Admin/AdminBill/Edit/@item.ID_Bill" class="mb-2 btn btn-warning mr-2" role="button" aria-pressed="true" style="pointer-events: none;">Cập nhật</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Admin/AdminBill/Edit/@item.ID_Bill" class="mb-2 btn btn-warning mr-2" role="button" aria-pressed="true">Cập nhật</a>
+                                        }
                                         <a class="delete-link mb-2 btn btn-danger mr-2" href="#" onclick="ConfirmDelete(@item.ID_Bill)">Xóa</a>
                                     </td>
                                 </tr>
@@ -66,8 +69,8 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="Bill">
-    <div class="modal-dialog">
+<div class="modal fade model-lg" id="Bill">
+    <div class="modal-dialog model-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Bạn có chắc muốn xóa danh mục này không?</h4>
@@ -93,7 +96,7 @@
         $.ajax({
             type: "POST",
             url: "/AdminBill/DeleteBill",
-            data: { Id_Category: carteId },
+            data: { Id_Bill: carteId },
             success: function (result) {
                 $("#Bill").modal('hide');
                 $("#row_" + carteId).remove();
