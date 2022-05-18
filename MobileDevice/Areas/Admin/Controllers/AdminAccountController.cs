@@ -17,7 +17,7 @@ namespace MobileDevice.Areas.Admin.Controllers
         // GET: Admin/AdminAccount
         public ActionResult Index()
         {
-            var accounts = db.Accounts.Include(a => a.Role).Where(p=>p.ID_Role == 2);
+            var accounts = db.Accounts.Include(a => a.Role).Where(p => p.ID_Role == 2);
             return View(accounts.ToList());
         }
         public ActionResult IndexCustomer()
@@ -68,21 +68,21 @@ namespace MobileDevice.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_Account,ID_Role,UserName,Password,FullName,Phone,Address,Email,Status,Avatar,IsManager,ResetPasswordCode,ActivationCode")] Account account)
         {
-            //if (ModelState.IsValid)
-            //{
-            account.Avatar = " ";
-            var f = Request.Files["Image"];
-            if (f != null && f.ContentLength > 0)
+            if (ModelState.IsValid)
             {
-                string FileName = System.IO.Path.GetFileName(f.FileName);
-                string UploadPath = Server.MapPath("~/wwwroot/Image/" + FileName);
-                f.SaveAs(UploadPath);
-                account.Avatar = FileName;
-            }
-            db.Accounts.Add(account);
+                account.Avatar = " ";
+                var f = Request.Files["Image2"];
+                if (f != null && f.ContentLength > 0)
+                {
+                    string FileName = System.IO.Path.GetFileName(f.FileName);
+                    string UploadPath = Server.MapPath("~/wwwroot/Image/" + FileName);
+                    f.SaveAs(UploadPath);
+                    account.Avatar = FileName;
+                }
+                db.Accounts.Add(account);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            //}
+            }
 
             ViewBag.ID_Role = new SelectList(db.Roles, "ID_Role", "Name", account.ID_Role);
             return View(account);
@@ -111,8 +111,8 @@ namespace MobileDevice.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_Account,ID_Role,UserName,Password,FullName,Phone,Address,Email,Status,Avatar,IsManager,ResetPasswordCode,ActivationCode")] Account account)
         {
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
             account.Avatar = " ";
             var f = Request.Files["Image"];
             if (f != null && f.ContentLength > 0)
@@ -123,9 +123,9 @@ namespace MobileDevice.Areas.Admin.Controllers
                 account.Avatar = FileName;
             }
             db.Entry(account).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            //}
+            db.SaveChanges();
+            return RedirectToAction("Index");
+            }
             ViewBag.ID_Role = new SelectList(db.Roles, "ID_Role", "Name", account.ID_Role);
             return View(account);
         }

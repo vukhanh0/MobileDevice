@@ -63,7 +63,7 @@
                         <li>
                             <div class="dropdown">
                                 <a class="nav-link dropdown-toggle" id="dropdownMenuButton1" data-toggle="dropdown" aria-expanded="true">
-                                    @Session["username"]
+                                    @Session["fullname"]
                                 </a>
                                 <div class="dropdown-menu " aria-labelledby="dropdownMenuButton1" style="background: #1e1f29">
                                     <a class="dropdown-item nav-item nav-link" href="@Url.Action("ChangeInfo","Login")" style="background: #1e1f29">Thông tin cá nhân</a>
@@ -102,11 +102,11 @@
                                         Danh mục
                                     </button>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                        <li><a class="dropdown-item" href="/Products/Index?sortOrder=@ViewBag.iphone">Iphone</a></li>
-                                        <li><a class="dropdown-item" href="/Products/Index?sortOrder=@ViewBag.samsung">Samsung</a></li>
-                                        <li><a class="dropdown-item" href="/Products/Index?sortOrder=@ViewBag.oppo">Oppo</a></li>
-                                        <li><a class="dropdown-item" href="/Products/Index?sortOrder=@ViewBag.huawei">Huawei</a></li>
-                                        <li><a class="dropdown-item" href="/Products/Index?sortOrder=@ViewBag.sony">Sony</a></li>
+                                        <li><a class="dropdown-item" href="/Products/Index?sortOrder=iphone">Iphone</a></li>
+                                        <li><a class="dropdown-item" href="/Products/Index?sortOrder=samsung">Samsung</a></li>
+                                        <li><a class="dropdown-item" href="/Products/Index?sortOrder=oppo">Oppo</a></li>
+                                        <li><a class="dropdown-item" href="/Products/Index?sortOrder=huawei">Huawei</a></li>
+                                        <li><a class="dropdown-item" href="/Products/Index?sortOrder=sony">Sony</a></li>
                                     </ul>
 
 

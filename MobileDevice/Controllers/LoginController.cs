@@ -121,7 +121,7 @@ namespace MobileDevice.Controllers
             var verifyUrl = "/Login/ResetPassword/" + activationCode;
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
 
-            var fromEmail = new MailAddress("nhom6aspnet@gmail.com", "Công ty TNHH Sendo");
+            var fromEmail = new MailAddress("nhom6aspnet@gmail.com", "Cửa hàng điện thoại Sendo");
             var toEmail = new MailAddress(email);
             var fromEmailPassword = "duykhanh@2611";
 
@@ -136,7 +136,7 @@ namespace MobileDevice.Controllers
             else if (emailfor == "Resetpassword")
             {
                 subject = "Đặt lại mật khẩu";
-                body = "<br/><br/>Chúng tôi nhận được yêu cầu đặt lại mật khẩu. Bấm vào link " + "<br/><br/><a href='" + link + "'>Đặt lại mật khẩu<a/>";
+                body = "<br/><br/>Chúng tôi nhận được yêu cầu đặt lại mật khẩu. Bấm vào link bên dưới để tạo mật khẩu mới" + "<br/><br/><a href='" + link + "'>Đặt lại mật khẩu<a/>";
             }
             var smtp = new SmtpClient
             {
@@ -203,15 +203,17 @@ namespace MobileDevice.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ResetPassword(ResetPasswordModel model)
+        public ActionResult ResetPassword(ResetPasswordModel model, FormCollection col)
         {
             if (ModelState.IsValid)
             {
+                var forgotpass = col["ForgotPassword"];
+                var confirmpass = col["ConfirmPassword"];
                 var user = db.Accounts.Where(a => a.ResetPasswordCode == model.ResetCode).FirstOrDefault();
                 if (user != null)
                 {
                     //user.Password = Crypto.Hash(model.NewPassword);
-                    user.Password = model.NewPassword;
+                    user.Password = forgotpass;
                     user.ResetPasswordCode = "";
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
@@ -223,7 +225,7 @@ namespace MobileDevice.Controllers
             {
                 ViewBag.ResetError = "Mật khẩu không trùng khớp !";
             }
-            return View(model);
+            return RedirectToAction("Login", "Login");
         }
         #endregion
 

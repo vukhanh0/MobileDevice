@@ -10,8 +10,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Color</h4>
-        <hr />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID_Color)
 
@@ -19,7 +18,7 @@
             <div class="page-header row no-gutters py-4">
                 <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
                     <span class="text-uppercase page-subtitle">Cập nhật</span>
-                    <h3 class="page-title">Danh mục sản phẩm</h3>
+                    <h3 class="page-title">Màu sắc</h3>
                 </div>
             </div>
             <div class="row">

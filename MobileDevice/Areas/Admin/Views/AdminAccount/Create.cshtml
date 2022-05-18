@@ -95,13 +95,13 @@
                                     <td>
                                         <img id="output" class="img-rounded" alt="Ảnh" width="180" height="200" src="~/wwwroot/img/download.png" />
                                         <p><label for="ufile" style="cursor: pointer">Chọn file ảnh</label></p>
-                                        <input name="Image" id="ufile" type="file" style="display: none" onchange="loadFile(event)" />
+                                        <input name="Image2" id="ufile" type="file" style="display: none" onchange="loadFile(event)" />
                                         
-                                        @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
+                                        @*@Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })*@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="vertical-align: inherit">Is Mânger</td>
+                                    <td style="vertical-align: inherit">Chức vụ quản lý</td>
                                     <td>
                                         @Html.EditorFor(model => model.IsManager)
                                         @Html.ValidationMessageFor(model => model.IsManager, "", new { @class = "text-danger" })
@@ -129,6 +129,10 @@
        aria-pressed="true" style=" position: relative; left: 123px; top: -57px;">Quay lại</a>
 </div>
 <script>
+    //$("#ufile").on("change", function (event) {
+    //    var image = document.getElementById('output');
+    //    image.src = URL.createObjectURL(event.target.files[0]);
+    //});
     var loadFile = function (event) {
         var image = document.getElementById('output');
         image.src = URL.createObjectURL(event.target.files[0]);

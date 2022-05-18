@@ -25,7 +25,7 @@ namespace MobileDevice.Controllers
 
             ViewBag.SPCaoCap = sortOrder == "caocap" ? "" : "caocap";
             ViewBag.SPTamtrung = sortOrder == "tamtrung" ? "" : "tamtrung";
-
+            ViewBag.SPGiaRe = sortOrder == "giare" ? "" : "giare";
 
             ViewBag.iphone = sortOrder == "iphone" ? "" : "iphone";
             ViewBag.samsung = sortOrder == "samsung" ? "" : "samsung";
@@ -79,10 +79,13 @@ namespace MobileDevice.Controllers
                     product = product.Where(s => s.ID_Category == 5).OrderBy(s => s.ID_Product);
                     break;
                 case "caocap":
-                    product = product.Where(s => s.Price > 15000000).OrderBy(s => s.ID_Product);
+                    product = product.Where(s => s.Price > 20000000).OrderBy(s => s.ID_Product);
                     break;
                 case "tamtrung":
-                    product = product.Where(s => s.Price <= 15000000).OrderBy(s => s.ID_Product);
+                    product = product.Where(s => s.Price <= 20000000 && s.Price > 10000000).OrderBy(s => s.ID_Product);
+                    break;
+                case "giare":
+                    product = product.Where(s => s.Price <= 10000000 ).OrderBy(s => s.ID_Product);
                     break;
                 default:
                     product = product.OrderBy(s => s.ID_Product);
@@ -101,6 +104,7 @@ namespace MobileDevice.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Products.Find(id);
+            ViewBag.cate = db.Products.Where(p => p.ID_Category == product.ID_Category && p.ID_Product != id);
             if (product == null)
             {
                 return HttpNotFound();

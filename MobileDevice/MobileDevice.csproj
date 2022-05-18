@@ -223,6 +223,7 @@
     <Content Include="wwwroot\Image\oppo-reno6-z-5g-bac-1-org.jpg" />
     <Content Include="wwwroot\Image\samsung-galaxy-a33-5g-xanh-1.jpg" />
     <Content Include="wwwroot\Image\xiaomi-redmi-note-11-1-4.jpg" />
+    <Content Include="wwwroot\img\about-sendo-update.png" />
     <Content Include="wwwroot\img\cart-trong.png" />
     <Content Include="wwwroot\img\download.png" />
     <Content Include="wwwroot\img\hotdeal.png" />
@@ -273,6 +274,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminLoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminPermissionController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TestBillController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -448,6 +450,11 @@
     <Content Include="Areas\Admin\Views\AdminPermission\Details.cshtml" />
     <Content Include="Areas\Admin\Views\AdminPermission\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AdminPermission\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TestBill\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\TestBill\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\TestBill\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\TestBill\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\TestBill\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

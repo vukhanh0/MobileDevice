@@ -48,6 +48,13 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td style="vertical-align: inherit">Hệ điều hành</td>
+                                        <td>
+                                            @Html.EditorFor(model => model.SystemOperation, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.SystemOperation, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td style="vertical-align: inherit">Màn hình</td>
                                         <td>
                                             @Html.EditorFor(model => model.Screen, new { htmlAttributes = new { @class = "form-control" } })
@@ -114,19 +121,19 @@
                                         <td style="vertical-align: inherit">Ảnh</td>
                                         <td>
                                             <img id="output" class="img-rounded" alt="Ảnh" width="180" height="200" src="~/wwwroot/img/notFoundProduct.png" />
-                                                <p><label for="ufile" style="cursor: pointer">Chọn file ảnh</label></p>
-                                                <input name="Image" id="ufile" type="file" style="display: none" onchange="loadFile(event)" />
+                                            <p><label for="ufile" style="cursor: pointer">Chọn file ảnh</label></p>
+                                            <input name="Image" id="ufile" type="file" style="display: none" onchange="loadFile(event)" />
                                             @*@Html.EditorFor(model => model.Image, new
-                                            {
-                                                htmlAttributes = new
-                                                {
-                                                    @class = "form-control",
-                                                    @name = "ImageFile",
-                                                    @id = "ufile",
-                                                    @type = "file",
-                                                    @style = "display: none",
-                                                }
-                                            })*@
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "form-control",
+                        @name = "ImageFile",
+                        @id = "ufile",
+                        @type = "file",
+                        @style = "display: none",
+                    }
+                })*@
                                             @*@Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control",  } })*@
                                             @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
                                         </td>

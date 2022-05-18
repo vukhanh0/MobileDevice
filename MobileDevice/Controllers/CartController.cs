@@ -151,7 +151,7 @@ namespace MobileDevice.Controllers
             ddh.Note = collection["Note"];
             ddh.CreatedDate = DateTime.Now;
             //var Ngaygiao = String.Format("{0:MM/dd/yyyy}", collection["Ngaygiao"]);
-            ddh.Status = true;
+            ddh.Status = false;
             db.Bills.Add(ddh);
             foreach (var item in gh)
             {

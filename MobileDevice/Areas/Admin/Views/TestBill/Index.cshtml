@@ -1,0 +1,88 @@
+﻿@model IEnumerable<MobileDevice.Models.Bill>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiverName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiverAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiverEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiverPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceiverName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceiverAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceiverEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceiverPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Bill }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_Bill }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Bill })
+        </td>
+    </tr>
+}
+
+</table>

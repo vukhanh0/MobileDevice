@@ -254,43 +254,50 @@
 
 
             <!-- product -->
-            <div class="col-md-3 col-xs-6">
-                <div class="product">
-                    <div class="product-img">
-                        <img src="./img/product04.png" alt="">
-                    </div>
-                    <div class="product-body">
-                        <p class="product-category">Category</p>
-                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                        <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                        <div class="product-rating">
+                    @foreach (var item in ViewBag.cate)
+                    {
+                        <!-- product -->
+                        <div class="col-md-3 col-xs-6">
+
+                            <div class="product">
+                                <div class="product-img">
+                                    @{
+                                        string Img = "~/wwwroot/Image/" + item.Image;
+                                    }
+                                    <img src="@Url.Content(Img)" alt="" style="margin-top: 20px">
+                                </div>
+                                <div class="product-body">
+                                    <p class="product-category">Danh muc</p>
+                                    <h3 class="product-name"><a href="#">@item.Name</a></h3>
+                                    <h4 class="product-price">@String.Format("{0:0,0}", @item.Price) <span class="currency"><u style="position: relative; top: -7px;">đ</u></span></h4>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-btns">
+                                        <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">So sánh sản phẩm</span></button>
+                                        <a href="/Products/Details?id=@item.ID_Product" class="quick-view"><i class="fa fa-eye"></i><span class="tooltip">Xem nhanh</span></a>
+                                    </div>
+                                </div>
+                                <div class="add-to-cart">
+                                    <a href="@Url.Action("ThemGiohang", "Cart", new {@IDsanpham = item.ID_Product, @strURL = Request.Url.ToString()})">
+
+                                        <button class="add-to-cart-btn">
+
+                                            <i class="fa fa-shopping-cart"></i> Thêm giỏ hàng
+
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+
+
                         </div>
-                        <div class="product-btns">
-                            <button class="add-to-wishlist">
-                                <i class="fa fa-heart-o"></i><span class="tooltipp">
-                                    add
-                                    to wishlist
-                                </span>
-                            </button>
-                            <button class="add-to-compare">
-                                <i class="fa fa-exchange"></i><span class="tooltipp">
-                                    add
-                                    to compare
-                                </span>
-                            </button>
-                            <button class="quick-view">
-                                <i class="fa fa-eye"></i><span class="tooltipp">
-                                    quick
-                                    view
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="add-to-cart">
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                    </div>
-                </div>
-            </div>
+                    }
+
             <!-- /product -->
 
         </div>

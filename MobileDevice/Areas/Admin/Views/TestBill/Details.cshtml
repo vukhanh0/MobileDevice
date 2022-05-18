@@ -1,0 +1,99 @@
+﻿@model MobileDevice.Models.Bill
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Bill</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Account.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiverName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceiverName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiverAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceiverAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiverEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceiverEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiverPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceiverPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Bill }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
