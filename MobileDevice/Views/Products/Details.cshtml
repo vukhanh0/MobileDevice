@@ -82,13 +82,13 @@
                 <div class="product-details">
                     <h2 class="product-name">@Model.Name</h2>
 
-                    <div class="product-rating">
+                    @*<div class="product-rating">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star-o"></i>
-                    </div>
+                    </div>*@
 
                     <div>
                         <h3 class="product-price">@String.Format("{0:0,0}", Model.Price) <span class="currency"><u style="position: relative; top: -7px;">đ</u></span></span></h3>
@@ -129,14 +129,10 @@
                             </button>
                         </a>
                     </div>
-                    <ul class="product-btns">
-
-                        <li><a href="#"><i class="fa fa-exchange"></i> So sánh sản phẩm</a></li>
-                    </ul>
 
                     <ul class="product-links">
                         <li>Danh mục:</li>
-                        <li><a href="#">Iphone</a></li>
+                        <li><a href="#">@Model.ID_Category</a></li>
                     </ul>
 
                     <ul class="product-links">
@@ -270,13 +266,13 @@
                                     <p class="product-category">Danh muc</p>
                                     <h3 class="product-name"><a href="#">@item.Name</a></h3>
                                     <h4 class="product-price">@String.Format("{0:0,0}", @item.Price) <span class="currency"><u style="position: relative; top: -7px;">đ</u></span></h4>
-                                    <div class="product-rating">
+                                    @*<div class="product-rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star-o"></i>
-                                    </div>
+                                    </div>*@
                                     <div class="product-btns">
                                         <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">So sánh sản phẩm</span></button>
                                         <a href="/Products/Details?id=@item.ID_Product" class="quick-view"><i class="fa fa-eye"></i><span class="tooltip">Xem nhanh</span></a>

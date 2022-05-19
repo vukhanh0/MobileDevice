@@ -228,9 +228,12 @@
     <Content Include="wwwroot\img\download.png" />
     <Content Include="wwwroot\img\hotdeal.png" />
     <Content Include="wwwroot\img\icon-dat-hang-thanh-cong-09.png" />
+    <Content Include="wwwroot\img\iphone-11-do-1-1-1-org.jpg" />
     <Content Include="wwwroot\img\logo-sendo.png" />
     <Content Include="wwwroot\img\logo.png" />
+    <Content Include="wwwroot\img\nokia-c30-1-1.jpg" />
     <Content Include="wwwroot\img\notFoundProduct.png" />
+    <Content Include="wwwroot\img\oppo-reno5-marvel-1-1-org.jpg" />
     <Content Include="wwwroot\img\product01.png" />
     <Content Include="wwwroot\img\product02.png" />
     <Content Include="wwwroot\img\product03.png" />
